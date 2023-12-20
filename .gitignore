@@ -1,0 +1,46 @@
+# .gitignore
+
+# Ignore videos and audios, too big to commit
+*.mp4
+*.mp3
+
+# Ignore txt files, they are temporary
+*.txt
+
+# Ignore Python build artifacts
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Ignore Python environment files
+*.env
+*.venv
+env/
+venv/
+ENV/
+
+# Ignore IDE and editor files
+.idea/
+*.swp
+*.swo
+*.swn
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.swn
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
