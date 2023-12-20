@@ -10,6 +10,11 @@ Inside of the `src` folder there is a sub-folder: Background. Paste a `backgroun
 [![](https://markdown-videos-api.jorgenkh.no/youtube/5_7s_iZj0TA)](https://youtu.be/5_7s_iZj0TA)
 
 ---
+APIs Used:
+- [tiktok-voice by oscie57](https://github.com/oscie57/tiktok-voice)
+- [moviepy by Zulko](https://github.com/Zulko/moviepy)
+- [whisper by OpenAI](https://github.com/openai/whisper)
+- [whisper-timestamped by linto-ai](https://github.com/openai/whisper)
 
-Created by [me](https://github.com/jacdevv)
+Created by [Me](https://github.com/jacdevv)
 
