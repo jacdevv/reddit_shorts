@@ -1,4 +1,4 @@
-def convert_words_to_dict(data, words_per_group=3):
+def convert_words_to_dict(data, words_per_group=2):
     result = {}
     words = [word for segment in data['segments'] for word in segment['words']]
     for i in range(0, len(words), words_per_group):

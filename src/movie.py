@@ -33,7 +33,7 @@ def create_subtitles(title, comment, background_video):
     # Create title subtitles
     for timestamp, (content, end_time) in title.items():
         start_time = float(timestamp)
-        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None)).set_duration(end_time - start_time).set_start(start_time)
+        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font="OmniblackOutline").set_duration(end_time - start_time).set_start(start_time)
         subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
         subtitles.append(subtitle)
         max_title_end_time = max(max_title_end_time, end_time)
@@ -42,7 +42,7 @@ def create_subtitles(title, comment, background_video):
     for timestamp, (content, end_time) in comment.items():
         start_time = float(timestamp) + max_title_end_time + delay
         end_time = end_time + max_title_end_time + delay
-        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None)).set_duration(end_time - start_time).set_start(start_time)
+        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font="OmniblackOutline").set_duration(end_time - start_time).set_start(start_time)
         subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
         subtitles.append(subtitle)
 
