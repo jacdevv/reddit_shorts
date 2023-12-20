@@ -8,7 +8,7 @@ Inside of the `src` folder there is a sub-folder: Background. Paste a `backgroun
 
 ## Example
 This is an example of an output video:
-![](example.mov)
+[![](https://markdown-videos-api.jorgenkh.no/youtube/5_7s_iZj0TA)](https://youtu.be/5_7s_iZj0TA)
 
 ---
 

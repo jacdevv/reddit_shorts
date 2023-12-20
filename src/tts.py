@@ -17,10 +17,10 @@ def create_tiktok_voice(title, comment):
         f.write(comment)
 
     # Convert title.txt to title.mp3
-    os.system(f"python {os.path.join(dir_path, 'voice.py')} -v en_us_010 -f {os.path.join(dir_path, 'text/title.txt')} --session {SESSION_ID} -n {os.path.join(dir_path, 'title.mp3')}")
+    os.system(f"python {os.path.join(dir_path, 'voice.py')} -v en_us_009 -f {os.path.join(dir_path, 'text/title.txt')} --session {SESSION_ID} -n {os.path.join(dir_path, 'title.mp3')}")
     
     # Convert comment.txt to comment.mp3
-    os.system(f"python {os.path.join(dir_path, 'voice.py')} -v en_us_010 -f {os.path.join(dir_path, 'text/comment.txt')} --session {SESSION_ID} -n {os.path.join(dir_path, 'comment.mp3')}")
+    os.system(f"python {os.path.join(dir_path, 'voice.py')} -v en_us_009 -f {os.path.join(dir_path, 'text/comment.txt')} --session {SESSION_ID} -n {os.path.join(dir_path, 'comment.mp3')}")
 
     # Combine title.mp3 and comment.mp3 into voice.mp3 with a 1.5-second delay
     # os.system(f"ffmpeg -y -i {os.path.join(dir_path, 'title.mp3')} -i {os.path.join(dir_path, 'comment.mp3')} -filter_complex \"[1:a]adelay=1000|1000[comment];[0:a][comment]concat=n=2:v=0:a=1\" {os.path.join(dir_path, 'voice.mp3')}")
