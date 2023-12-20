@@ -9,6 +9,12 @@ Inside of the `src` folder there is a sub-folder: Background. Paste a `backgroun
 ## Example
 [![](https://markdown-videos-api.jorgenkh.no/youtube/5_7s_iZj0TA)](https://youtu.be/5_7s_iZj0TA)
 
+## To-dos
+- Make a CLI interface
+- Allow customization of the voice
+- Allow customization of editing 
+- Allow multiple background videos and music
+
 ---
 APIs Used:
 - [tiktok-voice by oscie57](https://github.com/oscie57/tiktok-voice)
