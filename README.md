@@ -7,7 +7,6 @@ A program that automatically fetches reddit posts, then creates a YouTube short 
 Inside of the `src` folder there is a sub-folder: Background. Paste a `background` video (under the name *background.mp4*) and a background music (under the name *music.mp3*). If you plan to upload the video to the internet, please use your own content for the background or a fair-use content you downloaded.
 
 ## Example
-This is an example of an output video:
 [![](https://markdown-videos-api.jorgenkh.no/youtube/5_7s_iZj0TA)](https://youtu.be/5_7s_iZj0TA)
 
 ---
