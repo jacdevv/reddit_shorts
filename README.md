@@ -9,12 +9,13 @@ Inside of the `src` folder there is a sub-folder: Background. Paste a `backgroun
 Now that you have a background video, open a terminal inside this folder and run `python main.py`. This will run the script with the default settings. 
 
 Settings:
--v or --voice: The code of the desired voice. Default is "en_us_007", [Please check here](https://github.com/oscie57/tiktok-voice/wiki/Voice-Codes).
--w or --word: The word count per sentence. Default is 2.
--n or --name: The name for the output file (.mp4). Default is "output".
--f or --font: The font family for the text. Default is "MontserratBold".
--s or --subreddit: The subreddit to fetch data from. Default is "askreddit".
--m or --mode: Whether to fetch post or comment. Default is "comment".
+- `-v` or `--voice`: The code of the desired voice. Default is "en_us_007", [Please check here](https://github.com/oscie57/tiktok-voice/wiki/Voice-Codes).
+- `-w` or `--word`: The word count per sentence. Default is 2.
+- `-n` or `--name`: The name for the output file (.mp4). Default is "output".
+- `-f` or `--font`: The font family for the text. Default is "MontserratBold".
+- `-s` or `--subreddit`: The subreddit to fetch data from. Default is "askreddit".
+- `-m` or `--mode`: Whether to fetch post or comment. Default is "comment".
+
 Example of a full command: `python main.py -v en_us_007 -w 2 -n output -f MontserratBold -s TrueOffMyChest -m post`.
 
 ## Example
