@@ -4,7 +4,7 @@ This is Reddit Shorts.
 A program that automatically fetches reddit posts, then creates a YouTube short content out of it. It is very easy to use, requiring barely any manual work to make the videos. It can only make 1 video at a time, using 1 background video and multiple background music. The program is very customizable from the terminal.
 
 # How To Use
-Inside of the `src` folder there is a sub-folder: Background. Paste a `background` video (under the name *background.mp4*) and a background music (under the name *music.mp3*). Note that you can place more than 1 background music and the program will randomly pick one (name it *music-1.mp3*, *music-2.mp3*, etc. The program automatically counts how many music files there are). If you plan to upload the video to the internet, please use your own content for the background or a fair-use content you downloaded.
+Inside of the `src` folder there is a sub-folder: Background. Paste a `background` video (under the name *background.mp4*) and a background music. Note that you can place more than 1 background music and the program will randomly pick one (name it *music-1.mp3*, *music-2.mp3*, etc. The program automatically counts how many music files there are). If you plan to upload the video to the internet, please use your own content for the background or a fair-use content you downloaded.
 
 After that, create a .env file containing:
 - CLIENT_KEY = ... (From Reddit)
