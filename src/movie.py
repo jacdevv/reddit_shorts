@@ -13,7 +13,7 @@ output_file = "output.mp4" # Output file name
 
 def crop_video(background_video):
     # Generate a random number between 1 and 6 (minutes)
-    start_time = random.randint(1, 6) * 60  # Convert to seconds
+    start_time = random.randint(0, 12) * 60  # Convert to seconds
 
     # Cut the video from the start time to the end
     background_video = background_video.subclip(start_time)
@@ -25,7 +25,7 @@ def crop_video(background_video):
     background_video = background_video.crop(x1=int(x1), y1=0, x2=int(x2), y2=1920)
     return background_video
 
-def create_subtitles(title, comment, background_video):
+def create_subtitles(title, background_video, font, comment=None):
     subtitles = []
     delay = 0.8  # Delay in seconds
     max_title_end_time = 0  # To store the end time of the last title subtitle
@@ -33,18 +33,19 @@ def create_subtitles(title, comment, background_video):
     # Create title subtitles
     for timestamp, (content, end_time) in title.items():
         start_time = float(timestamp)
-        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font="OmniblackOutline").set_duration(end_time - start_time).set_start(start_time)
+        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
         subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
         subtitles.append(subtitle)
         max_title_end_time = max(max_title_end_time, end_time)
 
-    # Create comment subtitles with delay
-    for timestamp, (content, end_time) in comment.items():
-        start_time = float(timestamp) + max_title_end_time + delay
-        end_time = end_time + max_title_end_time + delay
-        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font="OmniblackOutline").set_duration(end_time - start_time).set_start(start_time)
-        subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
-        subtitles.append(subtitle)
+    if comment:
+        # Create comment subtitles with delay
+        for timestamp, (content, end_time) in comment.items():
+            start_time = float(timestamp) + max_title_end_time + delay
+            end_time = end_time + max_title_end_time + delay
+            subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
+            subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
+            subtitles.append(subtitle)
 
     return subtitles
 
@@ -64,20 +65,24 @@ def write_output_video(video_with_subtitles, output_file, codec, voice_over):
     video_with_subtitles = video_with_subtitles.set_audio(voice_over)
     video_with_subtitles.write_videofile(output_file, codec=codec, threads=8, fps=30)
 
-def create_video(titleData, commentData, background="background/background.mp4"):
+def create_video(titleData, output_name, font, background="background/background.mp4", commentData=None):
     print("Building video...")
     dir_path = os.path.dirname(os.path.realpath(__file__))
     background_file_path = os.path.join(dir_path, background)
     background_video = VideoFileClip(background_file_path)  # Open the background video
     background_video = crop_video(background_video)
-    subtitles = create_subtitles(titleData, commentData, background_video)
+    if commentData:
+        subtitles = create_subtitles(titleData, background_video, font, comment=commentData)
+    else:
+        subtitles = create_subtitles(titleData, background_video, font)
     video_with_subtitles = create_video_with_subtitles(background_video, subtitles)
 
     # Load the voice over for title and comment
     voice_file_path_title = os.path.join(dir_path, "title.mp3")
     voice_over_title = AudioFileClip(voice_file_path_title)
-    voice_file_path_comment = os.path.join(dir_path, "comment.mp3")
-    voice_over_comment = AudioFileClip(voice_file_path_comment)
+    if commentData:
+        voice_file_path_comment = os.path.join(dir_path, "comment.mp3")
+        voice_over_comment = AudioFileClip(voice_file_path_comment)
 
     # Load the background music
     music_file_path = os.path.join(dir_path, "background", "music.mp3")
@@ -99,7 +104,10 @@ def create_video(titleData, commentData, background="background/background.mp4")
     silence = AudioArrayClip(np.zeros((int(0.8 * 44100), 1)), fps=44100)
 
     # Concatenate the title voice over, silence, and comment voice over
-    voice_over = concatenate_audioclips([voice_over_title, silence, voice_over_comment])
+    if commentData:
+        voice_over = concatenate_audioclips([voice_over_title, silence, voice_over_comment])
+    else:
+        voice_over = voice_over_title
 
     # Combine the voice over and background music
     audio = CompositeAudioClip([voice_over, background_music])
@@ -111,7 +119,7 @@ def create_video(titleData, commentData, background="background/background.mp4")
     video_with_subtitles = video_with_subtitles.set_duration(last_subtitle_end_time)
 
     # Define the output file path
-    output_file = os.path.join(dir_path, "output", "output.mp4")
+    output_file = os.path.join(dir_path, "output", f"{output_name}.mp4")
 
     # Create a separate thread for writing the output video
     output_thread = threading.Thread(target=write_output_video, args=(video_with_subtitles, output_file, codec, audio))
