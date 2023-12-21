@@ -35,6 +35,7 @@ APIs Used:
 - [moviepy by Zulko](https://github.com/Zulko/moviepy)
 - [whisper by OpenAI](https://github.com/openai/whisper)
 - [whisper-timestamped by linto-ai](https://github.com/openai/whisper)
+- [praw by Reddit](https://github.com/praw-dev/praw)
 
 Created by [Me](https://github.com/jacdevv)
 
