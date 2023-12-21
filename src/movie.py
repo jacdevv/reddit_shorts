@@ -6,6 +6,8 @@ import threading
 import random
 from moviepy.audio.AudioClip import AudioArrayClip
 import numpy as np
+import random
+import glob
 change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"}) # Path to magick.exe
 
 codec = "libx264" # Codec for the output video
@@ -33,7 +35,7 @@ def create_subtitles(title, background_video, font, comment=None):
     # Create title subtitles
     for timestamp, (content, end_time) in title.items():
         start_time = float(timestamp)
-        subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
+        subtitle = TextClip(content, fontsize=80, color='white', stroke_width=1, stroke_color='black', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
         subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
         subtitles.append(subtitle)
         max_title_end_time = max(max_title_end_time, end_time)
@@ -43,7 +45,7 @@ def create_subtitles(title, background_video, font, comment=None):
         for timestamp, (content, end_time) in comment.items():
             start_time = float(timestamp) + max_title_end_time + delay
             end_time = end_time + max_title_end_time + delay
-            subtitle = TextClip(content, fontsize=80, color='white', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
+            subtitle = TextClip(content, fontsize=80, color='white', stroke_width=1, stroke_color='black', method='caption', size=(background_video.w, None), font=f"{font}").set_duration(end_time - start_time).set_start(start_time)
             subtitle = subtitle.set_position(("center", "center"))  # Set the position to center bottom
             subtitles.append(subtitle)
 
@@ -85,7 +87,9 @@ def create_video(titleData, output_name, font, background="background/background
         voice_over_comment = AudioFileClip(voice_file_path_comment)
 
     # Load the background music
-    music_file_path = os.path.join(dir_path, "background", "music.mp3")
+    music_files = glob.glob(os.path.join(dir_path, "background", "music-*.mp3"))
+    random_number = random.randint(1, len(music_files))
+    music_file_path = os.path.join(dir_path, "background", f"music-{random_number}.mp3")
     background_music = AudioFileClip(music_file_path)
 
     # Cut the first 3 seconds of the background music
